@@ -5,6 +5,17 @@ plaintext = input()
 parser = argparse.ArgumentParser()
 parser.add_argument("key", type = int)
 args = parser.parse_args()
+key = args.key
+text = plaintext.upper()
 
-print(args.key)
-print(plaintext)
+print(key)
+print(text)
+alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+def caesar_encrypt(text,key):
+    for i in range(len(text)):
+        index = (alphabet.index(text[0]) + key) % len(alphabet)
+        return alphabet[index] + caesar_encrypt(text[1:], key)
+
+caesar_encrypt(text,key)
+    
