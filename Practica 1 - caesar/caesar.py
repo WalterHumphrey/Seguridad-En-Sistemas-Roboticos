@@ -6,4 +6,4 @@ parser = argparse.ArgumentParser()
 parser.add_argument("key", type = int)
 args = parser.parse_args()
 
-print(parser.key())
+print(args.key)
