@@ -7,15 +7,24 @@ parser.add_argument("key", type = int)
 args = parser.parse_args()
 key = args.key
 text = plaintext.upper()
-
-print(key)
-print(text)
-alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+text = list(text)
+#print(key)
+#print(text)
+alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 def caesar_encrypt(text,key):
-    for i in range(len(text)):
-        index = (alphabet.index(text[0]) + key) % len(alphabet)
-        return alphabet[index] + caesar_encrypt(text[1:], key)
+    cipher = ''
+    for i in text:
+        if i in alphabet:
+            oldindex = alphabet.index(i)
+            newindex = (oldindex + key) % len(alphabet)
+            newletter = alphabet[newindex]
+        else:
+            newletter = i
+        cipher += newletter
+    return cipher
 
-caesar_encrypt(text,key)
+
+print(caesar_encrypt(text,key))
+
     
