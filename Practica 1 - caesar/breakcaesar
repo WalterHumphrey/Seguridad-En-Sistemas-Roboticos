@@ -2,6 +2,7 @@
 import argparse
 import sys
 import utils
+from collections import Counter
 
 # Reads 'echo' input and changes to upper case
 plaintext = sys.stdin.read()
@@ -11,9 +12,18 @@ text = list(text)
 ciphers = []
 
 for i in range(0,26):
-    utils.dictionary(i)
-    ciphers.append(utils.caesar_encrypt(text,i))
+    j = 26 - i
+    utils.dictionary(j)
+    ciphers.append(utils.caesar_encrypt(text,j))
 
-print(ciphers)
-        
-    
+#print(ciphers)
+count = 0
+
+for sentence in range(len(ciphers)):
+    l = len(ciphers[sentence])
+    E = round(ciphers[sentence].count('E') / l, 2)
+    T = round(ciphers[sentence].count('T') / l, 2)
+    A = round(ciphers[sentence].count('A') / l, 2)
+    O = round(ciphers[sentence].count('O') / l, 2)
+    I = round(ciphers[sentence].count('I') / l, 2)
+    print(ciphers[sentence], 'E: ' + str(E), 'T: ' + str(T), 'A: ' + str(A), 'O: ' + str(O), 'I: ' + str(I))

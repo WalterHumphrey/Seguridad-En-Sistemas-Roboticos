@@ -16,7 +16,8 @@ def caesar_encrypt(text,key):
         if letter in sh_alphabet:
             letter = sh_alphabet[letter]
             cipher = cipher + letter
-        else:
+        elif letter == ' ':
             cipher = cipher + ' '
+        else:
+            cipher = cipher + ''
     return cipher
-        
