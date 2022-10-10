@@ -3,6 +3,11 @@ import argparse
 import sys
 import utils
 from collections import Counter
+import math
+
+def euclidean(x,y):
+    dist = math.sqrt((x-y)**2)
+    return dist
 
 # Reads 'echo' input and changes to upper case
 plaintext = sys.stdin.read()
@@ -10,20 +15,47 @@ text = plaintext.upper()
 text = list(text)
 
 ciphers = []
+alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+text_freq = []
+distance = []
+all_dist = []
+idx = []
 
+
+# Letter frequency in english
+freq = [8.2, 1.5, 2.8, 4.3, 13, 2.2, 2, 6.1, 7, 0.15, 0.77, 4, 2.4, 6.7, 7.5, 1.9, 0.095, 6, 6.3, 9.1, 2.8, 0.98, 2.4, 0.15, 2, 0.074]
+
+# Brute force decryption
 for i in range(0,26):
     j = 26 - i
     utils.dictionary(j)
     ciphers.append(utils.caesar_encrypt(text,j))
 
-#print(ciphers)
+print(ciphers)
 count = 0
+spaces = 0
 
-for sentence in range(len(ciphers)):
-    l = len(ciphers[sentence])
-    E = round(ciphers[sentence].count('E') / l, 2)
-    T = round(ciphers[sentence].count('T') / l, 2)
-    A = round(ciphers[sentence].count('A') / l, 2)
-    O = round(ciphers[sentence].count('O') / l, 2)
-    I = round(ciphers[sentence].count('I') / l, 2)
-    print(ciphers[sentence], 'E: ' + str(E), 'T: ' + str(T), 'A: ' + str(A), 'O: ' + str(O), 'I: ' + str(I))
+for sentence in ciphers:
+    # Eliminate spaces
+    spaces = sentence.count(' ')
+    # Frequency of letters in text
+    l = len(sentence) - spaces
+    for letter in alphabet:
+        text_freq.append(sentence.count(letter)/l)
+    for i in range(len(text_freq)):
+        distance.append(euclidean(freq[i],text_freq[i]))
+    print(sum(distance))
+    all_dist.append(sum(distance))
+    text_freq = []
+    distance = []
+print(all_dist)
+all_sorted = sorted(all_dist, reverse=True)
+# for j in range(3):
+#     mx = all_dist.index(max(all_dist))
+#     idx.append(mx)
+#     all_dist.remove(all_dist[mx])
+#for n in range(3):
+#    print(ciphers[idx[n]])
+print(all_sorted)
+print('done')
+
