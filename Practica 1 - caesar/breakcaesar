@@ -14,13 +14,21 @@ plaintext = sys.stdin.read()
 text = plaintext.upper()
 text = list(text)
 
+# Auxiliar lists and variables
 ciphers = []
 alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 text_freq = []
 distance = []
 all_dist = []
 idx = []
-
+bigrams = ['TH', 'HE', 'IN', 'EN', 'NT', 'RE', 'ER', 'AN', 'TI', 'ES', 'ON', 'AT', 'SE', 'ND', 'OR', 'AR', 'AL', 'TE', 'CO', 'DE', 'TO', 'RA', 'ET', 'ED', 'IT', 'SA', 'EM', 'RO']
+bi = []
+trigrams = ['THE', 'AND', 'THA', 'ENT', 'ING', 'ION', 'TIO', 'FOR', 'NDE', 'HAS', 'NCE', 'EDT', 'TIS', 'OFT', 'STH', 'MEN']
+tri = []
+count = 0
+spaces = 0
+resbi = []
+restri = []
 
 # Letter frequency in english
 freq = [8.2, 1.5, 2.8, 4.3, 13, 2.2, 2, 6.1, 7, 0.15, 0.77, 4, 2.4, 6.7, 7.5, 1.9, 0.095, 6, 6.3, 9.1, 2.8, 0.98, 2.4, 0.15, 2, 0.074]
@@ -30,9 +38,6 @@ for i in range(0,26):
     j = 26 - i
     utils.dictionary(j)
     ciphers.append(utils.caesar_encrypt(text,j))
-
-count = 0
-spaces = 0
 
 for sentence in ciphers:
     # Eliminate spaces
@@ -48,10 +53,22 @@ for sentence in ciphers:
     text_freq = []
     distance = []
 
-# List of 3 sentences with leas distance (more similar to real frequency)
+# List of 3 sentences with least distance (more similar to real frequency)
 for j in range(3):
     mx = all_dist.index(min(all_dist))
     idx.append(mx)
     all_dist.remove(all_dist[mx])
-for n in range(3):
-   print(ciphers[idx[n]])
+    # Count common bigrams
+    for m in range(len(bigrams)):
+        bi.append(ciphers[idx[j]].count(bigrams[m]))
+    resbi.append(sum(bi))
+    bi = []
+    # Count common trigrams
+    for o in range(len(trigrams)):
+        tri.append(ciphers[idx[j]].count(trigrams[o]))
+    restri.append(sum(tri))
+    tri = []
+    # If sentence with least euclidean distance also has the most bigrams and trigrams, we have our answer
+    if restri.index(max(restri)) == resbi.index(max(resbi)):
+        print(str(idx[j]),':',ciphers[idx[j]])
+        break
