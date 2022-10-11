@@ -31,7 +31,6 @@ for i in range(0,26):
     utils.dictionary(j)
     ciphers.append(utils.caesar_encrypt(text,j))
 
-print(ciphers)
 count = 0
 spaces = 0
 
@@ -41,21 +40,18 @@ for sentence in ciphers:
     # Frequency of letters in text
     l = len(sentence) - spaces
     for letter in alphabet:
-        text_freq.append(sentence.count(letter)/l)
+        text_freq.append( (sentence.count(letter)/l) * 100)
+    # Euclidean distance between Real frequency and Frequency in text
     for i in range(len(text_freq)):
         distance.append(euclidean(freq[i],text_freq[i]))
-    print(sum(distance))
     all_dist.append(sum(distance))
     text_freq = []
     distance = []
-print(all_dist)
-all_sorted = sorted(all_dist, reverse=True)
-# for j in range(3):
-#     mx = all_dist.index(max(all_dist))
-#     idx.append(mx)
-#     all_dist.remove(all_dist[mx])
-#for n in range(3):
-#    print(ciphers[idx[n]])
-print(all_sorted)
-print('done')
 
+# List of 3 sentences with leas distance (more similar to real frequency)
+for j in range(3):
+    mx = all_dist.index(min(all_dist))
+    idx.append(mx)
+    all_dist.remove(all_dist[mx])
+for n in range(3):
+   print(ciphers[idx[n]])
