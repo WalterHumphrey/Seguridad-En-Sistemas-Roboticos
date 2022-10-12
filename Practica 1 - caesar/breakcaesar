@@ -53,8 +53,8 @@ for sentence in ciphers:
     text_freq = []
     distance = []
 
-# List of 3 sentences with least distance (more similar to real frequency)
 for j in range(3):
+    # List of 3 sentences with least distance (more similar to real frequency)
     mx = all_dist.index(min(all_dist))
     idx.append(mx)
     all_dist.remove(all_dist[mx])
