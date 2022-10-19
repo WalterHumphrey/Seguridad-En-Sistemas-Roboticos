@@ -42,10 +42,11 @@ GPG) la clave pública de Enrique Soriano es la misma.
 
 RESPUESTA:
 ====================================================
+Crear par de claves GPG: gpg --full-gen-key
+Exportar clave pública: gpg --output clave.gpg --armor --export walter.humphrey17@gmail.com
 
-
-
-
+Descargar la clave pública: http://gsyc.urjc.es/~esoriano
+Importamos: gpg --import publickey.asc
 
 
 ====================================================
@@ -55,7 +56,7 @@ son auténticas y pertenecen a Enrique Soriano? ¿Por qué?
 
 RESPUESTA:
 ====================================================
-
+No, porque ...
 
 
 
@@ -69,11 +70,12 @@ Enrique Soriano?
 
 RESPUESTA:
 ====================================================
+Preguntar por fingerprint y comparar:
+Fingeprint es 0ACA F90A 5363
+Comprobamos con: gpg --list-keys
+Fingerprint 0ACAF90A5363
 
-
-
-
-
+Si pertenece realmente a Enrique Soriano.
 
 ====================================================
 
@@ -90,10 +92,12 @@ alguna de las versiones fue publicada por el profesor? ¿Cuál o cuáles?
 RESPUESTA:
 ====================================================
 
-
-
-
-
+Firmar la clave: gpg --sign-key enrique.soriano@urjc.es
+Subir firma al servidor: pg --keyserver keyserver.ubuntu.com --send-keys F90A5363
+Asignar nivel de confianza: 
+gpg --edit-key enrique.soriano@urjc.es
+Trust
+5
 
 ====================================================
 
