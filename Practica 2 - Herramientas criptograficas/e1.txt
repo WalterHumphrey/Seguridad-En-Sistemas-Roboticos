@@ -99,6 +99,9 @@ gpg --edit-key enrique.soriano@urjc.es
 Trust
 5
 
+6. ?????????
+
+
 ====================================================
 
 7. Descargue el fichero secret.gpg, cifrado con una clave simétrica
@@ -107,15 +110,13 @@ y descífrelo. El secreto para descifrar el fichero es TOPSECRET.
 
 RESPUESTA:
 ====================================================
-
-
-
-
-
+Desciframos: gpg --output de --decrypt secret.gpg
+Estaba sigrafo con: AES256.CFB
+Contiene: Una imágen de la escultura de un tigre
 
 ====================================================
 
-8. Descargue a firma separada del mensaje en claro (secret.sig).
+8. Descargue la firma separada del mensaje en claro (secret.sig).
 Verifique la firma.
 
 ¿Puede estar seguro de que el mensaje es integro (no ha sido
@@ -124,10 +125,10 @@ mensaje?
 
 RESPUESTA:
 ====================================================
+Verificamos la firma separada: gpg --verify secret.sig de
 
-
-
-
+No podemos estar seguros de que es integro ya estamos verificando 
+la firma separada el mensaje en claro pero no la de el mensaje cifrado original.
 
 
 ====================================================
@@ -138,11 +139,9 @@ usada para descifrar el fichero.
 
 RESPUESTA:
 ====================================================
+steghide --extract -sf de -xf newde
 
-
-
-
-
+Mensaje oculto: BASE64 NO ES CIFRADO
 
 ====================================================
 
@@ -154,11 +153,9 @@ el modo CBC.
 
 COMANDOS:
 ====================================================
+GPG: gpg --output deCAES.gpg --symmetric --cipher-algo AES256 de
 
-
-
-
-
+OPENSSL: openssl enc -aes-256-cbc -pass pass:TOPSECRET -p -in de -out deCAESCBC.enc
 
 ====================================================
 
