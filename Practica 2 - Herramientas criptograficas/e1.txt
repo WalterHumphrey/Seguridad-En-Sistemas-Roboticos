@@ -130,7 +130,6 @@ Verificamos la firma separada: gpg --verify secret.sig de
 No podemos estar seguros de que es integro ya estamos verificando 
 la firma separada el mensaje en claro pero no la de el mensaje cifrado original.
 
-
 ====================================================
 
 9. ¿Oculta dicha imagen algún mensaje con técnicas de esteganografía
@@ -155,7 +154,7 @@ COMANDOS:
 ====================================================
 GPG: gpg --output deCAES.gpg --symmetric --cipher-algo AES256 de
 
-OPENSSL: openssl enc -aes-256-cbc -pass pass:TOPSECRET -p -in de -out deCAESCBC.enc
+OPENSSL: openssl aes-256-cbc -in de -out deCAES.ssl
 
 ====================================================
 
@@ -165,11 +164,13 @@ OPENSSL: openssl enc -aes-256-cbc -pass pass:TOPSECRET -p -in de -out deCAESCBC.
 COMANDO Y RESPUESTA:
 ====================================================
 
+sha1sum deCAES.gpg
+bc878374246d7934132162b9e2279d6d67fd8fcf  deCAES.gpg
 
+sha1sum deCAES.ssl 
+db51eedf80e0926322e49d88df511e9aaa918665  deCAES.ssl
 
-
-
-
+No coinciden, no deben coincidir ya que fueron cifrados con ???
 ====================================================
 
 12. Descifre ambos ficheros y compruebe que los datos descifrados son
@@ -179,10 +180,15 @@ un comando Unix para comparar dos ficheros:
 COMANDOS:
 ====================================================
 
+gpg --output decypher1 --decrypt deCAES.gpg
 
+openssl aes-256-cbc -d -in deCAES.ssl -out decypher2
 
+sha1sum decypher1
+3186bf5614c4aff1b63ae23d5b90e9550201ba51  decypher1
 
-
+sha1sum decypher2
+3186bf5614c4aff1b63ae23d5b90e9550201ba51  decypher2
 
 ====================================================
 
@@ -194,10 +200,9 @@ creación. Indique su número de serie:
 COMANDOS:
 ====================================================
 
+openssl req -new -nodes -x509 -newkey 4096 -out cert.pem -keyout privkey.pem -days 365 -subj "/C=DE/ST=NRW/L=Earth/O=ACME/OU=IT/CN=lsub.org/emailAddress=pepe@acme.jp"
 
-
-
-
+Numero de serie: 70 02 95 43 C1 CF 4D 5D D5 48 90 8B C4 62 C9 28 88 51 3D 58
 
 ====================================================
 
@@ -208,11 +213,13 @@ el certificado con el comando openssl.
 RESPUESTA:
 ====================================================
 
+openssl x509 -in www.urjc.es -text
+openssl x509 -in www.urjc.es -noout -sha1 -fingerprint
 
+Numero de serie: d7:7d:09:d0:55:f4:78:00:db:85:23:0a:81:d3:0d:d4
+Fngerprint: C2:62:05:C4:1B:5C:34:29:16:FF:76:28:C1:E2:DB:DE:AF:21:CB:34
 
-
-
-
+Dominios: ???
 ====================================================
 
 
