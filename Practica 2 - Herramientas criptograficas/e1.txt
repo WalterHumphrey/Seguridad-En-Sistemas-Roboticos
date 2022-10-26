@@ -232,11 +232,10 @@ del sistema se encuentran en el directorio /etc/ssl/certs.
 
 RESPUESTA:
 ====================================================
+Descargamos el certificado del intermedio, buscamos el CA raiz y realizamos la verificacion
 
-
-
-
-
+openssl verify -verbose -CAfile <(cat /etc/ssl/certs/USERTrust_RSA_Certification_Authority.pem GEANTOVRSACA4.pem) urjc.pem
+urjc.pem: OK
 
 ====================================================
 
