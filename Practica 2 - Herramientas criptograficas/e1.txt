@@ -217,7 +217,7 @@ openssl x509 -in www.urjc.es -text
 openssl x509 -in www.urjc.es -noout -sha1 -fingerprint
 
 Numero de serie: d7:7d:09:d0:55:f4:78:00:db:85:23:0a:81:d3:0d:d4
-Fngerprint: C2:62:05:C4:1B:5C:34:29:16:FF:76:28:C1:E2:DB:DE:AF:21:CB:34
+Fingerprint: C2:62:05:C4:1B:5C:34:29:16:FF:76:28:C1:E2:DB:DE:AF:21:CB:34
 
 Dominios: ???
 ====================================================
