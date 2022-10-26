@@ -172,7 +172,7 @@ bc878374246d7934132162b9e2279d6d67fd8fcf  deCAES.gpg
 sha1sum deCAES.ssl 
 db51eedf80e0926322e49d88df511e9aaa918665  deCAES.ssl
 
-No coinciden, no deben coincidir ya que fueron cifrados con ???
+No coinciden, no deben coincidir ya que fueron cifrados con ??????????
 ====================================================
 
 12. Descifre ambos ficheros y compruebe que los datos descifrados son
@@ -221,7 +221,7 @@ openssl x509 -in www.urjc.es -noout -sha1 -fingerprint
 Numero de serie: d7:7d:09:d0:55:f4:78:00:db:85:23:0a:81:d3:0d:d4
 Fingerprint: C2:62:05:C4:1B:5C:34:29:16:FF:76:28:C1:E2:DB:DE:AF:21:CB:34
 
-Dominios: ???
+Dominios: ????????
 ====================================================
 
 
