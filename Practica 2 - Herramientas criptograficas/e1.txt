@@ -97,8 +97,13 @@ gpg --edit-key enrique.soriano@urjc.es
 Trust
 5
 
-6. ?????????
+Verificamos autenticidad e integridad de enunciados:
+gpg --verify e1.txt
+gpg --verify e2.txt
+gpg --verify e3.txt
 
+La version 2 fue publicada por el profesor ya que es la unica que 
+muestra que fue firmada correctamente por Erique Soriano.
 
 ====================================================
 
@@ -125,8 +130,7 @@ RESPUESTA:
 ====================================================
 Verificamos la firma separada: gpg --verify secret.sig de
 
-No podemos estar seguros de que es integro ya que estamos verificando 
-la firma separada del mensaje en claro pero no la del mensaje cifrado original.
+El mensaje es integro ya que fue firmado correctamente por el profesor.
 
 ====================================================
 
