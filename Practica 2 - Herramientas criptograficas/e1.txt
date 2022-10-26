@@ -125,8 +125,8 @@ RESPUESTA:
 ====================================================
 Verificamos la firma separada: gpg --verify secret.sig de
 
-No podemos estar seguros de que es integro ya estamos verificando 
-la firma separada el mensaje en claro pero no la de el mensaje cifrado original.
+No podemos estar seguros de que es integro ya que estamos verificando 
+la firma separada del mensaje en claro pero no la del mensaje cifrado original.
 
 ====================================================
 
