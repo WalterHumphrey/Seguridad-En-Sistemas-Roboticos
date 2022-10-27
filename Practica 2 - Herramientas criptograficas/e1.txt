@@ -48,6 +48,21 @@ Exportar clave pública: gpg --output clave.gpg --armor --export walter.humphrey
 Descargar la clave pública: http://gsyc.urjc.es/~esoriano
 Importamos: gpg --import publickey.asc
 
+Verificamos nuestro anillo de llaves: gpg --list-keys
+
+Salida:
+-------------------------------
+pub   rsa4096 2022-10-19 [SC] [caduca: 2027-10-18]
+      B25C070DD912ACA52C24285CAFDE67E34CE64449
+uid        [  absoluta ] Walter Humphrey <walter.humphrey17@gmail.com>
+sub   rsa4096 2022-10-19 [E] [caduca: 2027-10-18]
+
+pub   rsa4096 2012-11-14 [SCEA] [caduca: 2026-02-21]
+      29C532C0EE857DCE384E362726930ACAF90A5363
+uid        [  desconocida ] Enrique Soriano-Salvador <enrique.soriano@urjc.es>
+uid        [  desconocida ] Enrique Soriano-Salvador <esoriano@gsyc.urjc.es>
+uid        [  desconocida ] Enrique Soriano-Salvador <enrique.soriano@gmail.com>
+sub   rsa4096 2012-11-14 [SEA] [caduca: 2026-02-21]
 
 ====================================================
 
@@ -99,10 +114,26 @@ Trust
 
 Verificamos autenticidad e integridad de enunciados:
 gpg --verify e1.txt
-gpg --verify e2.txt
-gpg --verify e3.txt
+Salida:
+gpg: Firmado el mar 18 oct 2022 19:19:11 CEST
+gpg:                usando RSA clave C7DC3D54399FC39D290A61C9A8D6D9F50054BBA6
+gpg: Firma INCORRECTA de "Enrique Soriano-Salvador <enrique.soriano@urjc.es>" [absoluta]
 
-La version 2 fue publicada por el profesor ya que es la unica que 
+gpg --verify e2.txt
+Salida:
+gpg: Firmado el mar 18 oct 2022 19:19:11 CEST
+gpg:                usando RSA clave C7DC3D54399FC39D290A61C9A8D6D9F50054BBA6
+gpg: Firma correcta de "Enrique Soriano-Salvador <enrique.soriano@urjc.es>" [absoluta]
+gpg:                 alias "Enrique Soriano-Salvador <esoriano@gsyc.urjc.es>" [absoluta]
+gpg:                 alias "Enrique Soriano-Salvador <enrique.soriano@gmail.com>" [absoluta]
+
+gpg --verify e3.txt
+Salida:
+gpg: Firmado el mar 18 oct 2022 19:19:11 CEST
+gpg:                usando RSA clave C7DC3D54399FC39D290A61C9A8D6D9F50054BBA6
+gpg: Firma INCORRECTA de "Enrique Soriano-Salvador <enrique.soriano@urjc.es>" [absoluta]
+
+Puedo asegurar que la version 2 fue publicada por el profesor ya que es la unica que 
 muestra que fue firmada correctamente por Erique Soriano.
 
 ====================================================
@@ -114,7 +145,7 @@ y descífrelo. El secreto para descifrar el fichero es TOPSECRET.
 RESPUESTA:
 ====================================================
 Desciframos: gpg --output de --decrypt secret.gpg
-Estaba sigrafo con: AES256.CFB
+Estaba cifrado con: AES256.CFB
 Contiene: Una imágen de la escultura de un tigre
 
 ====================================================
@@ -129,8 +160,15 @@ mensaje?
 RESPUESTA:
 ====================================================
 Verificamos la firma separada: gpg --verify secret.sig de
+Salida:
+gpg: Firmado el jue 10 feb 2022 12:04:16 CET
+gpg:                usando RSA clave C7DC3D54399FC39D290A61C9A8D6D9F50054BBA6
+gpg: Firma correcta de "Enrique Soriano-Salvador <enrique.soriano@urjc.es>" [absoluta]
+gpg:                 alias "Enrique Soriano-Salvador <esoriano@gsyc.urjc.es>" [absoluta]
+gpg:                 alias "Enrique Soriano-Salvador <enrique.soriano@gmail.com>" [absoluta]
 
-El mensaje es integro ya que fue firmado correctamente por el profesor.
+El mensaje es integro y no puede repudiar el mensaje 
+ya que fue firmado correctamente por el profesor.
 
 ====================================================
 
@@ -172,7 +210,8 @@ bc878374246d7934132162b9e2279d6d67fd8fcf  deCAES.gpg
 sha1sum deCAES.ssl 
 db51eedf80e0926322e49d88df511e9aaa918665  deCAES.ssl
 
-No coinciden, no deben coincidir ya que fueron cifrados con ??????????
+No coinciden, no deben coincidir ya que no es computacionalmente posible 
+encontrar dos pre-imagenes que generen el mismo resumen.
 ====================================================
 
 12. Descifre ambos ficheros y compruebe que los datos descifrados son
