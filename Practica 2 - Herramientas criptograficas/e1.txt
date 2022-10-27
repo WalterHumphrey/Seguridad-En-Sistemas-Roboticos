@@ -284,6 +284,8 @@ y cifrado para que sólo Enrique Soriano pueda leerlo. Tiene que copiar
 los datos cifrados/firmados en formato PEM (base64) en la actividad del
 Aula Virtual.
 
+gpg -o e1.pem --sign --encrypt -r walter.humphrey17@gmail.com -r enrique.soriano@urjc.es  e1.txt
+
 También debe entregar un fichero con su clave pública, llamado clave.gpg
 (como archivo enviado adjunto). Este fichero debe ser importable
 directamente con el comando gpg --import.
